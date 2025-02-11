@@ -1,157 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Image Selector</title>
-    <link rel="stylesheet" href="style.css"> <!-- LINK TO CSS -->
-    <style>
-/* General Reset */
-body {
-    background-color: #1e1e1e;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-/* Title */
-h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    letter-spacing: 1px;
-}
-
-/* Main Layout */
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    width: 90%;
-    max-width: 1200px;
-    flex-wrap: wrap; /* Allows stacking on small screens */
-}
-
-/* Image Box */
-.image-box {
-    min-width: 300px;
-    min-height: 300px;
-    max-width: 80vw;
-    max-height: 60vh;
-    background-color: #444;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 10px;
-    border: 2px solid white;
-    transition: width 0.3s ease, height 0.3s ease;
-}
-
-/* Image and Video */
-img, video {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-/* Buttons */
-.buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* Button Design */
-button {
-    background-color: #555;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: 0.2s;
-}
-
-button:hover {
-    background-color: #777;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-    .buttons {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    button {
-        padding: 10px 15px;
-        font-size: 14px;
-    }
-}
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <h1>Random Image Selector</h1>
     <div class="container">
-        <div class="image-box">
-            <img id="randomImage" src="" alt="Click a button to get an image">
-            <video id="randomVideo" loop autoplay muted style="display:none;"></video>
-        </div>
         <div class="buttons">
             <button onclick="fetchImage('League')">League</button>
             <button onclick="fetchImage('Valorant')">Valorant</button>
             <button onclick="fetchImage('LeagueGIF')">League GIF</button>
             <button onclick="fetchImage('ValorantGIF')">Valorant GIF</button>
         </div>
+        <div class="image-box">
+            <img id="randomImage" src="" alt="Click a button to get an image">
+            <video id="randomVideo" loop autoplay muted style="display:none;"></video>
+        </div>
     </div>
 
-    <script>
-async function fetchImage(category) {
-    try {
-        const response = await fetch(`/random-image/${category}`);
-        if (!response.ok) throw new Error("Failed to fetch image");
-
-        const data = await response.json();
-        const img = document.getElementById("randomImage");
-        const video = document.getElementById("randomVideo");
-        const imageBox = document.querySelector(".image-box");
-
-        img.style.display = "none";
-        video.style.display = "none";
-
-        const fileExtension = data.imageUrl.split('.').pop().toLowerCase();
-
-        if (["jpg", "jpeg", "png", "gif"].includes(fileExtension)) {
-            img.style.display = "block";
-            img.src = data.imageUrl;
-        } else if (["webm", "mp4"].includes(fileExtension)) {
-            video.style.display = "block";
-            video.src = data.imageUrl;
-        }
-
-        imageBox.style.width = "500px";
-        imageBox.style.height = "500px";
-
-    } catch (error) {
-        console.error("Error fetching image:", error);
-    }
-}
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
