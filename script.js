@@ -1,60 +1,35 @@
+const repoName = "your-repository"; // Change this to your actual GitHub repo name
+const basePath = `https://your-username.github.io/${repoName}/images/`;
+
 const images = {
-    League: ["images/League/image1.jpg", "images/League/image2.jpg"],
-    Valorant: ["images/Valorant/image1.png", "images/Valorant/image2.png"],
-    LeagueGIF: ["images/LeagueGIF/gif1.gif", "images/LeagueGIF/gif2.gif"],
-    ValorantGIF: ["images/ValorantGIF/gif1.gif", "images/ValorantGIF/gif2.gif"]
+    League: [`${basePath}League/image1.jpg`, `${basePath}League/image2.jpg`],
+    Valorant: [`${basePath}Valorant/image1.png`, `${basePath}Valorant/image2.png`],
+    LeagueGIF: [`${basePath}LeagueGIF/gif1.gif`, `${basePath}LeagueGIF/gif2.gif`],
+    ValorantGIF: [`${basePath}ValorantGIF/gif1.gif`, `${basePath}ValorantGIF/gif2.gif`]
 };
 
-const history = {
-    League: [],
-    Valorant: [],
-    LeagueGIF: [],
-    ValorantGIF: []
-};
+async function fetchImage(category) {
+    try {
+        const img = document.getElementById("randomImage");
+        const video = document.getElementById("randomVideo");
+        const imageBox = document.querySelector(".image-box");
 
-const historyLimit = 10;
+        img.style.display = "none";
+        video.style.display = "none";
 
-function fetchImage(category) {
-    const imgElement = document.getElementById("randomImage");
-    const videoElement = document.getElementById("randomVideo");
-    const imageBox = document.querySelector(".image-box");
+        const randomIndex = Math.floor(Math.random() * images[category].length);
+        const selectedFile = images[category][randomIndex];
+        const fileExtension = selectedFile.split('.').pop().toLowerCase();
 
-    if (!images[category] || images[category].length === 0) return;
-
-    // Get images that were not shown in the last `historyLimit` rolls
-    let availableImages = images[category].filter(img => !history[category].includes(img));
-
-    if (availableImages.length === 0) {
-        history[category] = []; // Reset history if all images were used
-        availableImages = [...images[category]];
+        if (fileExtension === 'gif' || fileExtension === 'mp4' || fileExtension === 'webm') {
+            video.style.display = "block";
+            video.src = selectedFile;
+            video.load();
+        } else {
+            img.style.display = "block";
+            img.src = selectedFile;
+        }
+    } catch (error) {
+        console.error("Error fetching image:", error);
     }
-
-    const randomIndex = Math.floor(Math.random() * availableImages.length);
-    const selectedImage = availableImages[randomIndex];
-
-    history[category].push(selectedImage);
-    if (history[category].length > historyLimit) history[category].shift(); // Keep history limited
-
-    // Reset display
-    imgElement.style.display = "none";
-    videoElement.style.display = "none";
-
-    const fileExtension = selectedImage.split('.').pop().toLowerCase();
-
-    if (fileExtension === 'gif' || fileExtension === 'png' || fileExtension === 'jpg' || fileExtension === 'jpeg') {
-        imgElement.src = selectedImage;
-        imgElement.style.display = "block";
-    } else if (fileExtension === 'webm' || fileExtension === 'mp4') {
-        videoElement.src = selectedImage;
-        videoElement.style.display = "block";
-    }
-
-    // Resize container
-    setTimeout(() => {
-        const newWidth = Math.max(imgElement.naturalWidth || videoElement.videoWidth, 500);
-        const newHeight = Math.max(imgElement.naturalHeight || videoElement.videoHeight, 500);
-
-        imageBox.style.width = `${Math.min(newWidth, window.innerWidth * 0.8)}px`;
-        imageBox.style.height = `${Math.min(newHeight, window.innerHeight * 0.8)}px`;
-    }, 100);
 }
