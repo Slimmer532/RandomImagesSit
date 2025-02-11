@@ -10,25 +10,12 @@ const images = {
 
 async function fetchImage(category) {
     try {
-        const img = document.getElementById("randomImage");
-        const video = document.getElementById("randomVideo");
-        const imageBox = document.querySelector(".image-box");
+        const response = await fetch('random-image.json'); // Load static file
+        const data = await response.json();
+        const images = data[category];
+        const randomImage = images[Math.floor(Math.random() * images.length)];
 
-        img.style.display = "none";
-        video.style.display = "none";
-
-        const randomIndex = Math.floor(Math.random() * images[category].length);
-        const selectedFile = images[category][randomIndex];
-        const fileExtension = selectedFile.split('.').pop().toLowerCase();
-
-        if (fileExtension === 'gif' || fileExtension === 'mp4' || fileExtension === 'webm') {
-            video.style.display = "block";
-            video.src = selectedFile;
-            video.load();
-        } else {
-            img.style.display = "block";
-            img.src = selectedFile;
-        }
+        document.getElementById("randomImage").src = randomImage;
     } catch (error) {
         console.error("Error fetching image:", error);
     }
