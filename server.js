@@ -7,7 +7,7 @@ const PORT = 3000;
 
 // Serve static files
 app.use(express.static('public'));
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/Images', express.static(path.join(__dirname, 'Images')));
 
 // Function to get random file from a directory
 function getRandomFile(dir) {
@@ -19,7 +19,7 @@ function getRandomFile(dir) {
 // API endpoint for random images
 app.get('/random-image/:category', (req, res) => {
     const category = req.params.category;
-    const categoryPath = path.join(__dirname, 'images', category);
+    const categoryPath = path.join(__dirname, 'Images', category);
 
     if (!fs.existsSync(categoryPath)) {
         return res.status(404).json({ error: 'Category not found' });
@@ -30,7 +30,7 @@ app.get('/random-image/:category', (req, res) => {
         return res.status(404).json({ error: 'No images found' });
     }
 
-    res.json({ imageUrl: `/images/${category}/${randomFile}` });
+    res.json({ imageUrl: `/Images/${category}/${randomFile}` });
 });
 
 // Start server
