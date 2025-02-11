@@ -1,10 +1,10 @@
 {
     "League": [
-        "images/League/image1.jpg",
-        "images/League/image2.jpg"
+        "https://yourgithubusername.github.io/images/League/image1.jpg",
+        "https://yourgithubusername.github.io/images/League/image2.jpg"
     ],
     "Valorant": [
-        "images/Valorant/image1.png",
-        "images/Valorant/image2.png"
+        "https://yourgithubusername.github.io/images/Valorant/image1.png",
+        "https://yourgithubusername.github.io/images/Valorant/image2.png"
     ]
 }
