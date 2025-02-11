@@ -1,21 +1,26 @@
-const repoName = "your-repository"; // Change this to your actual GitHub repo name
-const basePath = `https://your-username.github.io/${repoName}/images/`;
-
-const images = {
-    League: [`${basePath}League/image1.jpg`, `${basePath}League/image2.jpg`],
-    Valorant: [`${basePath}Valorant/image1.png`, `${basePath}Valorant/image2.png`],
-    LeagueGIF: [`${basePath}LeagueGIF/gif1.gif`, `${basePath}LeagueGIF/gif2.gif`],
-    ValorantGIF: [`${basePath}ValorantGIF/gif1.gif`, `${basePath}ValorantGIF/gif2.gif`]
-};
-
 async function fetchImage(category) {
     try {
-        const response = await fetch('random-image.json'); // Load static file
+        const response = await fetch(`/random-image/${category}`);
         const data = await response.json();
-        const images = data[category];
-        const randomImage = images[Math.floor(Math.random() * images.length)];
 
-        document.getElementById("randomImage").src = randomImage;
+        const img = document.getElementById("randomImage");
+        const video = document.getElementById("randomVideo");
+        const imageBox = document.querySelector(".image-box");
+
+        img.style.display = "none";
+        video.style.display = "none";
+
+        const fileUrl = data.imageUrl;
+        const fileExtension = fileUrl.split('.').pop().toLowerCase();
+
+        if (fileExtension === 'gif' || fileExtension === 'jpg' || fileExtension === 'png') {
+            img.style.display = "block";
+            img.src = fileUrl;
+        } else if (fileExtension === 'webm' || fileExtension === 'mp4') {
+            video.style.display = "block";
+            video.src = fileUrl;
+            video.play();
+        }
     } catch (error) {
         console.error("Error fetching image:", error);
     }
