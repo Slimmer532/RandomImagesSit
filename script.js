@@ -1,19 +1,10 @@
-function fetchImage(category) {
-    const images = {
-        Valorant: [
-            "images/Valorant/valorant1.jpg",
-            "images/Valorant/valorant2.jpg",
-            "images/Valorant/valorant3.jpg"
-        ],
-        League: [
-            "images/League/league1.jpg",
-            "images/League/league2.jpg",
-            "images/League/league3.jpg"
-        ]
-    };
+async function fetchImage(category) {
+    try {
+        const img = document.getElementById("randomImage");
+        const imagePath = `https://slimmer532.github.io/RandomImagesSit/images/${category}/image1.jpg`; // Change this dynamically
 
-    if (!images[category]) return;
-
-    const randomIndex = Math.floor(Math.random() * images[category].length);
-    document.getElementById("randomImage").src = images[category][randomIndex];
+        img.src = imagePath;
+    } catch (error) {
+        console.error("Error fetching image:", error);
+    }
 }
