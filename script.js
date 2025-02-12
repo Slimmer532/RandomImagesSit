@@ -1,32 +1,32 @@
-async function getRandomImage() {
-    const repo = "RandomImagesSit";
-    const user = "Slimmer532";
-    const folder = "images/Valorant"; // Change to "images/League" if needed
-    const apiUrl = `https://api.github.com/repos/${user}/${repo}/contents/${folder}`;
+async function fetchImagesFromGitHub(game) {
+    const apiUrl = `https://api.github.com/repos/Slimmer532/RandomImagesSit/contents/images/${game}`;
 
     try {
         let response = await fetch(apiUrl);
-        let files = await response.json();
+        let data = await response.json();
 
-        // Check if API response is valid
-        if (!Array.isArray(files)) {
-            console.error("API response is not an array:", files);
+        if (!Array.isArray(data)) {
+            console.error(`Failed to load images for ${game}`);
             return;
         }
 
-        // Extract image URLs
-        let images = files.map(file => file.download_url);
+        let images = data
+            .filter(file => file.name.match(/\.(jpg|jpeg|png|gif)$/i)) // Only image files
+            .map(file => file.download_url); // Extract direct image URLs
+
+        if (images.length === 0) {
+            console.error(`No images found for ${game}`);
+            return;
+        }
 
         // Pick a random image
         let randomIndex = Math.floor(Math.random() * images.length);
-        let randomImageUrl = images[randomIndex];
+        document.getElementById("randomImage").src = images[randomIndex];
 
-        // Set image source
-        document.getElementById("randomImage").src = randomImageUrl;
     } catch (error) {
-        console.error("Error loading images:", error);
+        console.error("Error fetching images:", error);
     }
 }
 
-// Run the function when the page loads
-window.onload = getRandomImage;
+// Default game (you can change this to "League" if needed)
+fetchImagesFromGitHub("Valorant");
