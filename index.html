@@ -6,17 +6,17 @@
     <title>Random Image Viewer</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body onload="initialize()">
+<body>
     <div class="container">
         <div class="sidebar">
             <h2>Select Category</h2>
-            <button onclick="setCategory('Valorant')">Valorant</button>
-            <button onclick="setCategory('League')">League</button>
+            <button id="valorantBtn">Valorant</button>
+            <button id="leagueBtn">League</button>
         </div>
         <div class="main">
             <h1>Random Image Viewer</h1>
             <img id="randomImage" style="display: none;">
-            <button id="hideButton" onclick="toggleImage()">Show Image</button>
+            <button id="hideButton">Show Image</button>
         </div>
     </div>
     <script src="script.js"></script>
