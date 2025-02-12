@@ -8,11 +8,17 @@
 </head>
 <body>
     <h1>Random Image Viewer</h1>
+
+    <div class="controls">
+        <div class="category-buttons">
+            <button onclick="setCategory('Valorant')">Valorant</button>
+            <button onclick="setCategory('League')">League</button>
+        </div>
+        <button onclick="loadRandomImage()">New Image</button>
+        <button onclick="toggleImage()">Hide Image</button>
+    </div>
+
     <img id="randomImage" src="" alt="Random Image">
-    <br>
-    <button onclick="loadRandomImage('Valorant')">Random Valorant Image</button>
-    <button onclick="loadRandomImage('League')">Random League Image</button>
-    <button onclick="toggleImage()">Hide Image</button>
 
     <script src="script.js"></script>
 </body>
