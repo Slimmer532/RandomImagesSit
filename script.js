@@ -1,5 +1,19 @@
 let currentCategory = 'Valorant';
 
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("valorantBtn").addEventListener("click", function() {
+        setCategory('Valorant');
+    });
+
+    document.getElementById("leagueBtn").addEventListener("click", function() {
+        setCategory('League');
+    });
+
+    document.getElementById("hideButton").addEventListener("click", function() {
+        toggleImage();
+    });
+});
+
 function setCategory(category) {
     currentCategory = category;
     loadRandomImage();
