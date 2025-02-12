@@ -7,18 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <h1>Random Image Selector</h1>
     <div class="container">
         <div class="buttons">
-            <button onclick="fetchImage('League')">League</button>
             <button onclick="fetchImage('Valorant')">Valorant</button>
-            <button onclick="fetchImage('LeagueGIF')">League GIF</button>
-            <button onclick="fetchImage('ValorantGIF')">Valorant GIF</button>
+            <button onclick="fetchImage('League')">League</button>
         </div>
         <div class="image-box">
-            <img src="https://Slimmer532.github.io/RandomImagesSit/images/image1.jpg">
-            <video id="randomVideo" loop autoplay muted style="display: none;"></video>
+            <img id="randomImage" src="" alt="Click a button to get an image">
         </div>
     </div>
 
