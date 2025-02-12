@@ -1,13 +1,14 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f4f4f4;
+    background-color: #1e1e1e;
+    color: #f1f1f1;
     margin: 0;
     padding: 20px;
 }
 
 h1 {
-    color: #333;
+    color: #ffffff;
 }
 
 .controls {
@@ -30,32 +31,26 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 5px;
+    background-color: #333;
+    color: white;
+    transition: background 0.3s;
 }
 
 button:hover {
-    opacity: 0.8;
-}
-
-button:first-of-type {
-    background-color: #007bff;
-    color: white;
-}
-
-button:nth-of-type(2) {
-    background-color: #28a745;
-    color: white;
-}
-
-button:nth-of-type(3) {
-    background-color: #dc3545;
-    color: white;
+    background-color: #555;
 }
 
 #randomImage {
     max-width: 90%;
     height: auto;
     margin-top: 20px;
-    border: 3px solid #333;
+    border: 3px solid #444;
     border-radius: 10px;
     transition: opacity 0.3s ease-in-out;
+}
+
+#toggleButton {
+    display: block;
+    margin: 20px auto;
+    background-color: #dc3545;
 }
