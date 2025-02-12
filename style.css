@@ -1,41 +1,61 @@
-const imageFolders = ["images/Valorant", "images/League"]; // Add other folders if needed
-let imageList = [];
-
-// Fetch all images from the folders
-async function fetchImages() {
-    let allImages = [];
-    for (let folder of imageFolders) {
-        let response = await fetch(`https://api.github.com/repos/Slimmer532/RandomImagesSit/contents/${folder}`);
-        let data = await response.json();
-        allImages = allImages.concat(data.map(file => file.download_url));
-    }
-    return allImages;
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
 }
 
-// Load a random image
-async function loadRandomImage() {
-    if (imageList.length === 0) {
-        imageList = await fetchImages();
-    }
-    if (imageList.length > 0) {
-        let randomIndex = Math.floor(Math.random() * imageList.length);
-        document.getElementById("randomImage").src = imageList[randomIndex];
-    }
+h1 {
+    color: #333;
 }
 
-// Toggle image visibility
-function toggleImage() {
-    let img = document.getElementById("randomImage");
-    let btn = document.querySelector("button[onclick='toggleImage()']");
-    
-    if (img.style.display === "none") {
-        img.style.display = "block";
-        btn.textContent = "Hide Image";
-    } else {
-        img.style.display = "none";
-        btn.textContent = "Show Image";
-    }
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
-// Load an image when the page opens
-window.onload = loadRandomImage;
+.category-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:first-of-type {
+    background-color: #007bff;
+    color: white;
+}
+
+button:nth-of-type(2) {
+    background-color: #28a745;
+    color: white;
+}
+
+button:nth-of-type(3) {
+    background-color: #dc3545;
+    color: white;
+}
+
+#randomImage {
+    max-width: 90%;
+    height: auto;
+    margin-top: 20px;
+    border: 3px solid #333;
+    border-radius: 10px;
+    transition: opacity 0.3s ease-in-out;
+}
