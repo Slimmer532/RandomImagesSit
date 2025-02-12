@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Image Selector</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Random Image</title>
 </head>
 <body>
-    <h1>Random Image Selector</h1>
-    <div class="container">
-        <div class="buttons">
-            <button onclick="fetchImage('Valorant')">Valorant</button>
-            <button onclick="fetchImage('League')">League</button>
-        </div>
-        <div class="image-box">
-            <img id="randomImage" src="" alt="Random Image">
-<button onclick="getRandomImage()">New Image</button>
-        </div>
-    </div>
-
+    <h1>Random Image</h1>
+    <select id="gameSelect">
+        <option value="Valorant">Valorant</option>
+        <option value="League">League</option>
+    </select>
+    <button onclick="changeGame()">Load Image</button>
+    <br>
+    <img id="randomImage" src="" alt="Random Image" width="500">
+    
     <script src="script.js"></script>
+    <script>
+        function changeGame() {
+            let selectedGame = document.getElementById("gameSelect").value;
+            fetchImagesFromGitHub(selectedGame);
+        }
+    </script>
 </body>
 </html>
