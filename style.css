@@ -1,67 +1,52 @@
 body {
+    background-color: #1e1e1e;
+    color: #ffffff;
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #121212; /* Dark background */
-    color: #e0e0e0; /* Light gray text */
-    margin: 0;
-    padding: 20px;
-}
-
-h1 {
-    color: #ffffff;
-}
-
-.controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.category-buttons {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 button {
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
+    background-color: #333;
+    color: #fff;
     border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
     border-radius: 5px;
-    background-color: #333333; /* Dark gray buttons */
-    color: white;
-    transition: background 0.3s;
 }
 
 button:hover {
-    background-color: #444444; /* Slightly lighter hover */
+    background-color: #555;
 }
 
-#imageContainer {
-    display: flex;
+.image-container {
+    display: none; /* Hidden by default */
     justify-content: center;
     align-items: center;
-    height: auto;
-    margin-top: 20px;
+    width: 100%;
+    max-width: 800px;
 }
 
-#randomImage {
-    max-width: 90%;
+img {
+    max-width: 100%;
     height: auto;
-    border: 3px solid #2a2a2a; /* Darker border */
     border-radius: 10px;
-    transition: opacity 0.3s ease-in-out;
 }
 
-#toggleButton {
-    display: block;
-    margin: 20px auto;
-    background-color: #555555; /* Medium-dark gray */
-}
-
-#toggleButton:hover {
-    background-color: #777777; /* Lighter hover */
+.button-container {
+    display: flex;
+    gap: 10px;
 }
