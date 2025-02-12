@@ -22,11 +22,14 @@ async function fetchImage(category) {
     img.style.display = "none";
     video.style.display = "none";
 
+    // Construct the correct path for GitHub Pages
+    const fullPath = `${window.location.origin}/${randomFile}`;
+
     if (randomFile.endsWith(".gif") || randomFile.endsWith(".jpg") || randomFile.endsWith(".png")) {
-        img.src = randomFile;
+        img.src = fullPath;
         img.style.display = "block";
     } else if (randomFile.endsWith(".mp4") || randomFile.endsWith(".webm")) {
-        video.src = randomFile;
+        video.src = fullPath;
         video.style.display = "block";
     }
 }
