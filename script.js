@@ -47,4 +47,4 @@ function toggleImage() {
 }
 
 // Load an image when the page opens
-window.onload = loadRandomImage;
+// window.onload = loadRandomImage;
