@@ -35,8 +35,8 @@ async function loadRandomImage() {
 // Toggle image visibility
 function toggleImage() {
     let img = document.getElementById("randomImage");
-    let btn = document.querySelector("button[onclick='toggleImage()']");
-    
+    let btn = document.getElementById("toggleButton");
+
     if (img.style.display === "none") {
         img.style.display = "block";
         btn.textContent = "Hide Image";
