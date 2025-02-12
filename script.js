@@ -46,5 +46,5 @@ function toggleImage() {
     }
 }
 
-// Load an image when the page opens
-// window.onload = loadRandomImage;
+// Load an image when the page opens, but keep it hidden
+window.onload = loadRandomImage;
