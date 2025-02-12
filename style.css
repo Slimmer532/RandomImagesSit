@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #121212; /* Darker background */
+    background-color: #121212; /* Dark background */
     color: #e0e0e0; /* Light gray text */
     margin: 0;
     padding: 20px;
@@ -37,13 +37,20 @@ button {
 }
 
 button:hover {
-    background-color: #444444; /* Slightly lighter hover effect */
+    background-color: #444444; /* Slightly lighter hover */
+}
+
+#imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin-top: 20px;
 }
 
 #randomImage {
     max-width: 90%;
     height: auto;
-    margin-top: 20px;
     border: 3px solid #2a2a2a; /* Darker border */
     border-radius: 10px;
     transition: opacity 0.3s ease-in-out;
