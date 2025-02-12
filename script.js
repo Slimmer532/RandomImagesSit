@@ -1,22 +1,19 @@
-async function fetchImage(category) {
-    const basePath = "https://slimmer532.github.io/RandomImagesSit/Images/";
-
+function fetchImage(category) {
     const images = {
-        League: [`${basePath}League/image1.jpg`, `${basePath}League/image2.jpg`],
-        Valorant: [`${basePath}Valorant/image1.png`, `${basePath}Valorant/image2.png`],
-        LeagueGIF: [`${basePath}LeagueGIF/gif1.gif`, `${basePath}LeagueGIF/gif2.gif`],
-        ValorantGIF: [`${basePath}ValorantGIF/gif1.gif`, `${basePath}ValorantGIF/gif2.gif`]
+        Valorant: [
+            "images/Valorant/valorant1.jpg",
+            "images/Valorant/valorant2.jpg",
+            "images/Valorant/valorant3.jpg"
+        ],
+        League: [
+            "images/League/league1.jpg",
+            "images/League/league2.jpg",
+            "images/League/league3.jpg"
+        ]
     };
 
-    if (!images[category]) {
-        console.error("Category not found:", category);
-        return;
-    }
+    if (!images[category]) return;
 
-    // Pick a random image
     const randomIndex = Math.floor(Math.random() * images[category].length);
-    const imageUrl = images[category][randomIndex];
-
-    // Set the image source
-    document.getElementById("randomImage").src = imageUrl;
+    document.getElementById("randomImage").src = images[category][randomIndex];
 }
