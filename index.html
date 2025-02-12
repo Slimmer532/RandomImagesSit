@@ -7,19 +7,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Random Image Viewer</h1>
-
-    <div class="controls">
-        <div class="category-buttons">
+    <div class="container">
+        <div class="sidebar">
+            <h2>Select Category</h2>
             <button onclick="setCategory('Valorant')">Valorant</button>
             <button onclick="setCategory('League')">League</button>
         </div>
+        <div class="main">
+            <h1>Random Image Viewer</h1>
+            <img id="randomImage" style="display: none;">
+            <button id="hideButton" onclick="toggleImage()">Show Image</button>
+        </div>
     </div>
-
-    <img id="randomImage" src="" alt="Random Image" style="display: none;">
-
-    <button id="toggleButton" onclick="toggleImage()">Show Image</button>
-
     <script src="script.js"></script>
 </body>
 </html>
