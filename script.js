@@ -1,50 +1,50 @@
-const imageFolders = {
-    "Valorant": "images/Valorant",
-    "League": "images/League"
-};
+let images = [];
 let currentCategory = "Valorant"; // Default category
-let imageList = [];
+let isImageVisible = false; // Image hidden by default
 
-// Set category and reload images
-function setCategory(category) {
-    currentCategory = category;
-    imageList = []; // Reset list
-    loadRandomImage();
-}
-
-// Fetch images from the selected folder
-async function fetchImages(folder) {
-    let response = await fetch(`https://api.github.com/repos/Slimmer532/RandomImagesSit/contents/${folder}`);
-    let data = await response.json();
-    return data.map(file => file.download_url);
-}
-
-// Load a random image
-async function loadRandomImage() {
-    let folder = imageFolders[currentCategory];
-
-    if (imageList.length === 0) {
-        imageList = await fetchImages(folder);
-    }
-    if (imageList.length > 0) {
-        let randomIndex = Math.floor(Math.random() * imageList.length);
-        document.getElementById("randomImage").src = imageList[randomIndex];
+async function fetchImages(category) {
+    try {
+        let response = await fetch(`https://api.github.com/repos/Slimmer532/RandomImagesSit/contents/images/${category}`);
+        let data = await response.json();
+        images = data.map(file => file.download_url); // Preload all image URLs
+    } catch (error) {
+        console.error("Error fetching images:", error);
     }
 }
 
-// Toggle image visibility
-function toggleImage() {
-    let img = document.getElementById("randomImage");
-    let btn = document.getElementById("toggleButton");
+// Load Valorant images by default
+fetchImages(currentCategory);
 
-    if (img.style.display === "none") {
-        img.style.display = "block";
-        btn.textContent = "Hide Image";
-    } else {
-        img.style.display = "none";
-        btn.textContent = "Show Image";
+function showRandomImage() {
+    if (images.length === 0) return;
+
+    let randomIndex = Math.floor(Math.random() * images.length);
+    let imageElement = document.getElementById("randomImage");
+    imageElement.src = images[randomIndex];
+
+    // Ensure image is visible
+    let container = document.getElementById("imageContainer");
+    container.style.display = "block";
+    isImageVisible = true;
+}
+
+function hideImage() {
+    let container = document.getElementById("imageContainer");
+    container.style.display = isImageVisible ? "none" : "block";
+    isImageVisible = !isImageVisible;
+}
+
+function changeCategory(category) {
+    if (currentCategory !== category) {
+        currentCategory = category;
+        fetchImages(category);
     }
 }
 
-// Load an image when the page opens, but keep it hidden
-window.onload = loadRandomImage;
+// Event listeners
+document.getElementById("valorantButton").addEventListener("click", () => changeCategory("Valorant"));
+document.getElementById("leagueButton").addEventListener("click", () => changeCategory("League"));
+document.getElementById("toggleButton").addEventListener("click", hideImage);
+document.addEventListener("keydown", (event) => {
+    if (event.key === " ") showRandomImage(); // Press Space to change image quickly
+});
