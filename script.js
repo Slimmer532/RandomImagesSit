@@ -1,34 +1,50 @@
-async function fetchImagesFromGitHub(game) {
-    const apiUrl = `https://api.github.com/repos/Slimmer532/RandomImagesSit/contents/images/${game}`;
+const imageFolders = {
+    "Valorant": "images/Valorant",
+    "League": "images/League"
+};
+let currentCategory = "Valorant"; // Default category
+let imageList = [];
 
-    console.log(`Fetching images from: ${apiUrl}`); // Debug log
+// Set category and reload images
+function setCategory(category) {
+    currentCategory = category;
+    imageList = []; // Reset list
+    loadRandomImage();
+}
 
-    try {
-        let response = await fetch(apiUrl);
-        let data = await response.json();
+// Fetch images from the selected folder
+async function fetchImages(folder) {
+    let response = await fetch(`https://api.github.com/repos/Slimmer532/RandomImagesSit/contents/${folder}`);
+    let data = await response.json();
+    return data.map(file => file.download_url);
+}
 
-        if (!Array.isArray(data)) {
-            console.error(`⚠️ Error: Could not load images for ${game}`);
-            return;
-        }
+// Load a random image
+async function loadRandomImage() {
+    let folder = imageFolders[currentCategory];
 
-        let images = data
-            .filter(file => file.name.match(/\.(jpg|jpeg|png|gif)$/i))
-            .map(file => file.download_url);
-
-        if (images.length === 0) {
-            console.error(`⚠️ No images found for ${game}`);
-            return;
-        }
-
-        let randomIndex = Math.floor(Math.random() * images.length);
-        document.getElementById("randomImage").src = images[randomIndex];
-        console.log(`✅ Loaded image: ${images[randomIndex]}`);
-
-    } catch (error) {
-        console.error("🚨 Fetch error:", error);
+    if (imageList.length === 0) {
+        imageList = await fetchImages(folder);
+    }
+    if (imageList.length > 0) {
+        let randomIndex = Math.floor(Math.random() * imageList.length);
+        document.getElementById("randomImage").src = imageList[randomIndex];
     }
 }
 
-// Test League manually
-fetchImagesFromGitHub("League");
+// Toggle image visibility
+function toggleImage() {
+    let img = document.getElementById("randomImage");
+    let btn = document.querySelector("button[onclick='toggleImage()']");
+    
+    if (img.style.display === "none") {
+        img.style.display = "block";
+        btn.textContent = "Hide Image";
+    } else {
+        img.style.display = "none";
+        btn.textContent = "Show Image";
+    }
+}
+
+// Load an image when the page opens
+window.onload = loadRandomImage;
