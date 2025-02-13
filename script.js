@@ -9,7 +9,7 @@ document.getElementById("invisibleUnlock").addEventListener("click", function() 
 });
 
 async function fetchImageList(category) {
-    let url = `https://api.github.com/repos/Slimmer532/RandomImagesSit/contents/images/${category}`;
+    let imgUrl = `https://corsproxy.io/?https://raw.githubusercontent.com/Slimmer532/RandomImagesSit/main/images/${currentCategory}/${randomFile}`;
     try {
         let response = await fetch(url);
         let data = await response.json();
