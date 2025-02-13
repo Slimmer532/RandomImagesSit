@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Images</title>
+    <title>Random Image Viewer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="invisibleUnlock"></div>
+
     <h1>Random Image Viewer</h1>
 
-    <div class="button-container">
-        <button id="valorantBtn">Valorant</button>
-        <button id="leagueBtn">League</button>
-        <button id="aiGirlsBtn" style="display: none;">AiGirls</button> 
+    <div class="category-buttons">
+        <button onclick="setCategory('Valorant')">Valorant</button>
+        <button onclick="setCategory('League')">League</button>
+        <button id="aiGirlsButton" onclick="setCategory('AiGirls')" style="display: none;">AiGirls</button>
     </div>
 
-    <img id="randomImage" style="display: none;"/>
+    <div class="image-container">
+        <img id="randomImage" style="display: none;">
+    </div>
 
-    <button id="hideButton">Show Image</button>
-
-    <div id="invisibleUnlock"></div> <!-- Invisible Unlock Button -->
+    <button id="hideButton" onclick="toggleImage()" style="display: none;">Hide Image</button>
 
     <script src="script.js"></script>
 </body>
