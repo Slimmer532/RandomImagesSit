@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Images</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- Ensure this is correctly linked -->
 </head>
 <body>
     <h1>Random Images</h1>
 
-    <button onclick="setCategory('Valorant')">Valorant</button>
-    <button onclick="setCategory('League')">League</button>
-    <button id="aiGirlsButton" onclick="setCategory('AiGirls')" style="display: none;">AiGirls</button>
-    <button id="invisibleUnlock" style="opacity: 0; position: absolute;">Hidden Unlock</button>
+    <div class="button-container">
+        <button onclick="setCategory('Valorant')">Valorant</button>
+        <button onclick="setCategory('League')">League</button>
+        <button id="aiGirlsButton" onclick="setCategory('AiGirls')" style="display: none;">AiGirls</button>
+        <button id="invisibleUnlock" style="opacity: 0; position: absolute;">Hidden Unlock</button>
+    </div>
 
     <img id="randomImage" style="display: none; max-width: 80%; margin-top: 20px;"/>
 
