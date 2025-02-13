@@ -3,28 +3,42 @@ body {
     color: #fff;
     text-align: center;
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
     color: #0f0;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
 button {
     background-color: #044504;
     color: white;
-    padding: 10px;
+    padding: 10px 15px;
     border: none;
-    margin: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 button:hover {
     background-color: #066506;
 }
 
-img {
+#randomImage {
     display: block;
     margin: 20px auto;
     max-width: 80%;
     border: 2px solid #0f0;
+}
+
+#hideButton {
+    margin-top: 10px;
+    background-color: #b30000;
 }
