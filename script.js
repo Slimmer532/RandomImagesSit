@@ -1,8 +1,9 @@
 let currentCategory = "Valorant";
 let history = [];
 let preloadedImages = [];
-let imageList = {}; // Store filenames from GitHub API
+let imageList = {};
 
+// Unlock hidden category
 document.getElementById("invisibleUnlock").addEventListener("click", function() {
     document.getElementById("aiGirlsButton").style.display = "inline-block";
 });
@@ -35,7 +36,7 @@ async function setCategory(category) {
 function getRandomImageUrl() {
     let files = imageList[currentCategory];
     if (!files || files.length === 0) return "";
-    
+
     let randomFile = files[Math.floor(Math.random() * files.length)];
     return `https://raw.githubusercontent.com/Slimmer532/RandomImagesSit/main/images/${currentCategory}/${randomFile}`;
 }
