@@ -1,69 +1,50 @@
 let currentCategory = "Valorant";
 let history = [];
 let preloadedImages = [];
-let imageList = {};
+let imageList = [];
 
-// Unlock hidden category
 document.getElementById("invisibleUnlock").addEventListener("click", function() {
     document.getElementById("aiGirlsButton").style.display = "inline-block";
 });
 
-async function fetchImageList(category) {
-    let imgUrl = `https://corsproxy.io/?https://raw.githubusercontent.com/Slimmer532/RandomImagesSit/main/images/${currentCategory}/${randomFile}`;
-    try {
-        let response = await fetch(url);
-        let data = await response.json();
-        imageList[category] = data.map(file => file.name);
-    } catch (error) {
-        console.error("Error fetching image list:", error);
-        imageList[category] = [];
+// 🔄 Load Image List on Page Load
+function loadImageList() {
+    let apiUrl = `https://api.github.com/repos/Slimmer532/RandomImagesSit/contents/images/${currentCategory}`;
+    
+    fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+        imageList = data.map(file => file.download_url); // ✅ Get direct links
+        preloadNextImages();
+    })
+    .catch(error => console.error("❌ Error fetching images:", error));
+}
+
+// 🎲 Pick a Random Image from List
+function showRandomImage() {
+    if (imageList.length === 0) {
+        console.error("❌ No images loaded. Check API response.");
+        return;
     }
+    
+    let randomIndex = Math.floor(Math.random() * imageList.length);
+    let imageUrl = imageList[randomIndex];
+
+    history.push(imageUrl);
+    document.getElementById("randomImage").src = imageUrl;
+    document.getElementById("randomImage").style.display = "block";
+    document.getElementById("hideButton").style.display = "block";
 }
 
-async function setCategory(category) {
-    currentCategory = category;
-    history = [];
-    preloadedImages = [];
-    document.getElementById("randomImage").style.display = "none";
-    document.getElementById("hideButton").style.display = "none";
-
-    if (!imageList[category]) {
-        await fetchImageList(category);
-    }
-    preloadNextImages();
-}
-
-function getRandomImageUrl() {
-    let files = imageList[currentCategory];
-    if (!files || files.length === 0) return "";
-
-    let randomFile = files[Math.floor(Math.random() * files.length)];
-    return `https://raw.githubusercontent.com/Slimmer532/RandomImagesSit/main/images/${currentCategory}/${randomFile}`;
-}
-
+// 🔄 Preload Next 3 Images
 function preloadNextImages() {
+    preloadedImages = [];
     for (let i = 0; i < 3; i++) {
         let img = new Image();
-        img.src = getRandomImageUrl();
+        img.src = imageList[Math.floor(Math.random() * imageList.length)];
         preloadedImages.push(img);
     }
 }
 
-function showRandomImage() {
-    if (preloadedImages.length > 0) {
-        let image = preloadedImages.shift();
-        history.push(image.src);
-        document.getElementById("randomImage").src = image.src;
-        document.getElementById("randomImage").style.display = "block";
-        document.getElementById("hideButton").style.display = "block";
-        preloadNextImages();
-    }
-}
-
-function toggleImage() {
-    let img = document.getElementById("randomImage");
-    img.style.display = img.style.display === "none" ? "block" : "none";
-}
-
-// Fetch images for default category
-fetchImageList(currentCategory).then(preloadNextImages);
+// 🛠 Initialize
+loadImageList();
