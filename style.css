@@ -42,3 +42,14 @@ button:hover {
     margin-top: 10px;
     background-color: #b30000;
 }
+
+#invisibleUnlock {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
