@@ -7,6 +7,17 @@ document.getElementById("invisibleUnlock").addEventListener("click", function() 
     document.getElementById("aiGirlsButton").style.display = "inline-block";
 });
 
+// ✅ Function to Set Category and Reload Images
+function setCategory(category) {
+    currentCategory = category;
+    history = [];
+    preloadedImages = [];
+    imageList = [];
+    document.getElementById("randomImage").style.display = "none";
+    document.getElementById("hideButton").style.display = "none";
+    loadImageList();
+}
+
 // ✅ Load Image List from GitHub API
 async function loadImageList() {
     let apiUrl = `https://api.github.com/repos/Slimmer532/RandomImagesSit/contents/images/${currentCategory}`;
