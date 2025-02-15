@@ -1,34 +1,38 @@
+/* style.css */
 body {
+    background-color: #1e1e1e;
+    color: #ffffff;
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f5f5f5;
+}
+
+.container {
+    padding: 20px;
+}
+
+.button-container {
+    margin-bottom: 20px;
 }
 
 button {
-    padding: 10px;
-    margin: 5px;
     background-color: #044504;
     color: white;
     border: none;
+    padding: 10px 20px;
+    margin: 5px;
     cursor: pointer;
-    border-radius: 5px;
 }
 
 button:hover {
-    background-color: #056705;
+    background-color: #066506;
 }
 
 #randomImage {
-    display: none;
-    max-width: 90%;
-    margin-top: 20px;
+    max-width: 80%;
+    height: auto;
+    margin: 20px 0;
 }
 
-#hideButton {
-    display: none;
-}
-
-/* Invisible unlock button */
 #invisibleUnlock {
     position: absolute;
     top: 10px;
