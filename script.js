@@ -7,26 +7,38 @@ document.getElementById("invisibleUnlock").addEventListener("click", function() 
     document.getElementById("aiGirlsButton").style.display = "inline-block";
 });
 
-// 🔄 Load Image List on Page Load
-function loadImageList() {
+// ✅ Load Image List from GitHub API
+async function loadImageList() {
     let apiUrl = `https://api.github.com/repos/Slimmer532/RandomImagesSit/contents/images/${currentCategory}`;
     
-    fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-        imageList = data.map(file => file.download_url); // ✅ Get direct links
-        preloadNextImages();
-    })
-    .catch(error => console.error("❌ Error fetching images:", error));
+    try {
+        let response = await fetch(apiUrl);
+        let data = await response.json();
+        
+        if (!Array.isArray(data)) {
+            console.error("❌ GitHub API Error:", data);
+            return;
+        }
+
+        imageList = data.map(file => file.download_url); // ✅ Get direct image links
+
+        if (imageList.length > 0) {
+            preloadNextImages();
+        } else {
+            console.error("❌ No images found in category:", currentCategory);
+        }
+    } catch (error) {
+        console.error("❌ Error fetching images:", error);
+    }
 }
 
 // 🎲 Pick a Random Image from List
 function showRandomImage() {
     if (imageList.length === 0) {
-        console.error("❌ No images loaded. Check API response.");
+        console.error("❌ No images loaded.");
         return;
     }
-    
+
     let randomIndex = Math.floor(Math.random() * imageList.length);
     let imageUrl = imageList[randomIndex];
 
@@ -44,6 +56,12 @@ function preloadNextImages() {
         img.src = imageList[Math.floor(Math.random() * imageList.length)];
         preloadedImages.push(img);
     }
+}
+
+// 🔘 Toggle Image Visibility
+function toggleImage() {
+    let img = document.getElementById("randomImage");
+    img.style.display = img.style.display === "none" ? "block" : "none";
 }
 
 // 🛠 Initialize
