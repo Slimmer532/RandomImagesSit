@@ -1,30 +1,26 @@
+/* style.css */
 body {
-    background-color: #222;
-    color: #fff;
-    text-align: center;
+    background-color: #1e1e1e;
+    color: #ffffff;
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    text-align: center;
 }
 
-h1 {
-    color: #0f0;
+.container {
+    padding: 20px;
 }
 
 .button-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 button {
     background-color: #044504;
     color: white;
-    padding: 10px 15px;
     border: none;
+    padding: 10px 20px;
+    margin: 5px;
     cursor: pointer;
-    font-size: 16px;
 }
 
 button:hover {
@@ -32,15 +28,9 @@ button:hover {
 }
 
 #randomImage {
-    display: block;
-    margin: 20px auto;
     max-width: 80%;
-    border: 2px solid #0f0;
-}
-
-#hideButton {
-    margin-top: 10px;
-    background-color: #b30000;
+    height: auto;
+    margin: 20px 0;
 }
 
 #invisibleUnlock {
@@ -49,8 +39,7 @@ button:hover {
     left: 10px;
     width: 30px;
     height: 30px;
-    background-color: transparent;
+    background: transparent;
     border: none;
     cursor: pointer;
 }
-

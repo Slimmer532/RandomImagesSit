@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Images</title>
-    <link rel="stylesheet" href="style.css"> <!-- Ensure this is correctly linked -->
+    <title>Random Image Viewer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-    <h1>Random Images</h1>
-
-    <div class="button-container">
-        <button onclick="setCategory('Valorant')">Valorant</button>
-        <button onclick="setCategory('League')">League</button>
-        <button id="aiGirlsButton" onclick="setCategory('AiGirls')" style="display: none;">AiGirls</button>
-        <button id="invisibleUnlock" style="opacity: 0; position: absolute;">Hidden Unlock</button>
+    <div class="container">
+        <h1>Random Image Viewer</h1>
+        <div class="button-container">
+            <button id="valorantButton" onclick="setCategory('Valorant')">Valorant</button>
+            <button id="leagueButton" onclick="setCategory('League')">League</button>
+            <button id="aiGirlsButton" onclick="setCategory('AiGirls')" style="display: none;">AiGirls</button>
+        </div>
+        <img id="randomImage" style="display: none;" alt="Random Image">
+        <button id="hideButton" onclick="toggleImage()" style="display: none;">Show/Hide Image</button>
     </div>
-
-    <img id="randomImage" style="display: none; max-width: 80%; margin-top: 20px;"/>
-
-    <button id="hideButton" onclick="toggleImage()" style="display: none;">Hide Image</button>
-
+    <button id="invisibleUnlock"></button>
     <script src="script.js"></script>
 </body>
 </html>
