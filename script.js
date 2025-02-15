@@ -16,7 +16,11 @@ function setCategory(category) {
 }
 
 function getRandomImageUrl() {
-    return `https://raw.githubusercontent.com/Slimmer532/RandomImagesSit/main/images/${currentCategory}/` + generateRandomString() + ".jpg";
+    const formats = ["jpg", "png", "webp"]; // Allowed formats
+    const randomFormat = formats[Math.floor(Math.random() * formats.length)]; // Pick one format
+    return `https://raw.githubusercontent.com/Slimmer532/RandomImagesSit/main/images/${currentCategory}/` + generateRandomString() + `.${randomFormat}`;
+}
+
 }
 
 function generateRandomString() {
