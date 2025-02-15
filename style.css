@@ -37,4 +37,5 @@ button:hover {
     height: 30px;
     background: transparent;
     border: none;
+    cursor: pointer;
 }
